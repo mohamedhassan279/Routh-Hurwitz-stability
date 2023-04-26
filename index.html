@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#6610f2" />
+    <!--  Styles  -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--  Navbar  -->
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:  rgb(22, 40, 67);">
+      <a class="navbar-brand" href="#">Routh–Hurwitz stability criterion</a>
+    </nav>
+
+    <div class="container-fluid p-5 my-5">
+        <div class="row border-0">
+          <div class="col-md-6 mx-auto">
+            <div class="card border-0">
+              <div class="card-body"  style="background-color: rgb(22, 40, 67);">
+                <div class="form-group border-0 d-flex flex-row justify-content-center">
+                  <label for="order" id="order-label" class="mr-3 mt-1 d-none d-lg-inline-block">System Order:</label>
+                  <input type="number" class="form-control w-25 mr-3" id="order" value="2"/>
+                  <button class="btn btn-success mb-3" onclick="buildEqn()">Apply</button>
+                  <button class="btn btn-danger mb-3 ml-2" onclick="clearall()">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </div>
+      
+                <div class="form-group quadeqbox mb-5 mt-5">
+                    <input type="number" class="input-margin-bottom" autocomplete="off" id="a" value="0" />
+                    <span class="vboxvar">S<sup>2</sup>+</span>
+                    <input type="number" class="input-margin-bottom" autocomplete="off" id="b" value="0"/>
+                    <span class="vboxvar">S<sup>1</sup>+</span>
+                    <input type="number" class="input-margin-bottom" autocomplete="off" id="c" value="1" />
+                    <span class="vboxvar">= 0</span>
+                </div>
+      
+                <div class="form-group d-flex justify-content-center">
+                    <button class="btn btn-success mb-3" id="getAns" onclick="quadcalc()">
+                        Get Answer &nbsp;<i class="fa fa-calculator" aria-hidden="true"></i>
+                      </button>
+                </div>
+                <div class="resultbox">
+                  <h2 class="xsmallbox xcont">Answer: <h3 id="ans"></h3></h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="ext-white py-3" style="background-color:  rgb(22, 40, 67);">
+        <div class="container text-center" style="color: white;">
+          <p>
+            &copy; 2023 | Created By: <p class="font-weight-light" >Mohammed Hassan, Marwan Essam, Abd-Elrahman Alaadin <br> Hussien Mohammed, Mohammed Rafiq </p>
+          </p>
+        </div>
+      </footer>
+      
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+

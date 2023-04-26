@@ -1,0 +1,78 @@
+body {
+  background: linear-gradient(to right, #43c6ac, #191654);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+input {
+  width: 8%;
+  text-align: center;
+}
+
+.card,
+.card-body {
+  border: 3px solid #1c2331;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(96, 94, 94, 0.1);
+}
+
+.input-margin-bottom {
+  margin-bottom: 10px;
+  text-align: center;
+  margin-right: 2%;
+  margin-left: 2%;
+  min-width: 100px;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.resultbox {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+}
+
+.xsmallbox {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.xcont {
+  margin-top: 10px;
+}
+
+
+.vboxvar {
+  color: white;
+}
+
+
+footer {
+  background-color: #1c2331;
+  font-size: 16px;
+  padding: 20px 0;
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
+footer p span {
+  color: #00c853;
+  font-weight: bold;
+}
+
+
+
+#order-label {
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}
