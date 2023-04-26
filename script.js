@@ -1,6 +1,7 @@
 function clearall() {
   const inputs = document.querySelectorAll("input");
   for (let i = 0; i < inputs.length; i++) {
+    if(inputs[i].id=="order") continue;
     inputs[i].value = "0";
   }
   const dbox = document.querySelector(".dbox");
