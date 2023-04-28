@@ -53,7 +53,8 @@ function quadcalc() {
     const input = document.getElementById(String.fromCharCode(97 + i));
     coefficients.push(parseFloat(input.value));
   }
-  console.log(coefficients);
+  const answer = document.getElementById("ans");
+  answer.textContent = solveSystem (coefficients, order);
 }
 
 document.addEventListener("keydown", function (event) {
@@ -66,3 +67,120 @@ document.addEventListener("keydown", function (event) {
     clearall();
   }
 });
+
+function check (routhTable) {
+  let x = 0;
+  for (let i = 1; i < routhTable.length; i++) {
+    if (routhTable[i][0] * routhTable[i-1][0] < 0) {
+      x++;
+    }
+  }
+  if (x === 0) {
+    return `System is stable`;
+  }
+  if (x === 1) {
+    return `System is unstable, it has 1 pole in the right half-plane.`;
+  }
+  return `System is unstable, it has ${x} poles in the right half plane.`;
+}
+
+function checkZeroRow (row) {
+  console.log (`now iam check ${row} with length ${row.length}`);
+  for (let i = 0; i < row.length; i++) {
+    console.log (row[i]);
+    if (row[i] != 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function solveSystem (coefficients, order) {
+  coefficients.reverse();
+
+  if (order == 0) {
+    return `System is stable`;
+  }
+
+  if (order == 1) {
+    if (coefficients[1] * coefficients[0] >= 0) {
+      return `System is stable`;
+    } else {
+      return `System is unstable, it has 1 pole in the right half-plane.`;
+    }
+  }
+
+  // for debugging
+  for (let i = 0; i <= order; i++) {
+    console.log(`coeff of ${i} = ${coefficients[i]}`);
+  }
+
+  // initiate the routh table
+  const routhTable = new Array();
+  for (let i = 0; i <= order; i++) {
+    routhTable.push ([]);
+  }
+
+  // set the first row
+  for (let i = order; i >= 0; i-=2) {
+    routhTable[order].push (coefficients[i]);
+  }
+  routhTable[order].push (0);
+
+  // set second row
+  for (let i = order-1; i >= 0; i -= 2) {
+    routhTable[order-1].push (coefficients[i]);
+  }
+  routhTable[order-1].push (0);
+
+  // get the rest of the table
+  for (let i = order-2; i >= 0; i--) {
+    for (let j = 0; j < i; j++) {
+      let sz = routhTable[i].length;
+      let f1 = routhTable[i+1][0];
+      let f2 = routhTable[i+2][0];
+      let f3 = routhTable[i+2][sz+1];
+      let f4 = routhTable[i+1][sz+1];
+      console.log (i + " " + sz + " " + f1 + " " + f2 + " " + f3 + " " + f4);
+      routhTable[i].push ((f1 * f3 - f2 * f4) / f1);
+      console.log ((f1 * f3 - f2 * f4) / f1);
+    }
+    if (i === 0) {
+      let f1 = routhTable[1][0];
+      let f2 = routhTable[2][0];
+      let f3 = routhTable[2][1];
+      let f4 = routhTable[1][1];
+      routhTable[i].push ((f1 * f3 - f2 * f4) / f1);
+      console.log ((f1 * f3 - f2 * f4) / f1);
+      if (routhTable[0][0] === 0) {
+        routhTable[0][0] = Number.EPSILON;
+      }
+      break;
+    }
+    routhTable[i].push (0);
+    if (checkZeroRow (routhTable[i])) {
+      console.log (`row ${i} all zeroes`);
+      console.log (routhTable[i]);
+      routhTable[i] = getNewCoeffs (routhTable[i+1], i+1);
+      console.log (`new row ${i} = ${routhTable[i]}`);
+    } else if (routhTable[i][0] == 0) {
+      console.log (`row ${i} starts with zero`);
+      console.log (routhTable[i]);
+      routhTable[i][0] = Number.EPSILON;
+      if (routhTable[i+1][0] < 0) {
+        routhTable[i][0] *= -1;
+      }
+      console.log(routhTable[i]);
+    }
+  }
+  console.log (routhTable);
+  return check(routhTable);
+}
+
+function getNewCoeffs (row, order) {
+  const arr = new Array ();
+  for (let i = 0; i < order; i++) {
+    arr.push (row[i] * (order - i*2));
+  }
+  return arr;
+}
